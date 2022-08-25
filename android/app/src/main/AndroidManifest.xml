@@ -28,5 +28,11 @@
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
+    <meta-data
+        android:name="SMT_APP_ID"
+        android:value="2332cb617b6794f160187a83858c5495" />
+    <meta-data
+        android:name="SMT_IS_AUTO_FETCHED_LOCATION"
+        android:value="1" />
   </application>
 </manifest>

@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import androidx.annotation.NonNull;
-
+import com.netcore.android.Smartech;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -13,10 +13,14 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import com.myproject.newarchitecture.MainApplicationReactNativeHost;
+import com.netcore.android.SMTBundleKeys;
+import com.netcore.android.logger.SMTDebugLevel;
+import com.netcore.android.Smartech;
 
 import expo.modules.ApplicationLifecycleDispatcher;
 import expo.modules.ReactNativeHostWrapper;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -59,6 +63,10 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    Smartech smartech = Smartech.getInstance(new WeakReference<>(this.getApplicationContext()));
+    smartech.initializeSdk(this);
+    smartech.setDebugLevel(SMTDebugLevel.Level.VERBOSE);
+    smartech.trackAppInstallUpdateBySmartech();
     // If you opted-in for the New Architecture, we enable the TurboModule system
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
